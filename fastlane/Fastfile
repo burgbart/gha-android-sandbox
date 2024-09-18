@@ -1,0 +1,15 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy to Firebase App Distribution"
+  lane :firebase_distribution do
+    gradle(
+      task: "assembleRelease"
+    )
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      groups: ENV["FIREBASE_TESTERS_GROUP"],
+      firebase_cli_path: ENV["FIREBASE_CLI_PATH"]
+    )
+  end
+end
