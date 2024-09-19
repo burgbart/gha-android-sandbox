@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "722428438106",
+    "project_id": "example-project-1510307118506",
+    "storage_bucket": "example-project-1510307118506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722428438106:android:b7da48ab5783b2ea711a63",
+        "android_client_info": {
+          "package_name": "com.bartburg.githubactionsandbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722428438106-evepverk3qpqksijjolr815n0gk3hknk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZcTotqVl3Y8MPuTgplNRD4l2Mm-jJYmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722428438106-evepverk3qpqksijjolr815n0gk3hknk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
