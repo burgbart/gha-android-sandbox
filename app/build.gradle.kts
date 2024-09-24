@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.firebase.appdistribution)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.services)
@@ -29,6 +30,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution {
+                artifactType = "APK"
+                appId = "example-project-1510307118506"
+            }
+
         }
     }
     compileOptions {

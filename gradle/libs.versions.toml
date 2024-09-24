@@ -3,6 +3,7 @@ agp = "8.5.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 firebaseBom = "33.3.0"
+firebase-app-distribution = "5.0.0"
 firebase-crashlytics-plugin = "3.0.2"
 gms-services = "4.4.2"
 junit = "4.13.2"
@@ -33,6 +34,7 @@ firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.re
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-app-distribution"}
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin"}
 google-services = { id = "com.google.gms.google-services", version.ref = "gms-services" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
