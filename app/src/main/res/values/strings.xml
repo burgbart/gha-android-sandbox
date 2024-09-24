@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Github Action Sandbox</string>
+    <string name="screen.first.name.text">Android</string>
+    <string name="screen_first_name_a11y">Hello Android!</string>
 </resources>

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.firebase.appdistribution)
+    alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -27,6 +30,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution {
+                artifactType = "APK"
+                appId = "example-project-1510307118506"
+            }
+
         }
     }
     compileOptions {
@@ -59,6 +67,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
