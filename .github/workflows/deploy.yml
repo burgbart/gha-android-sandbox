@@ -31,13 +31,16 @@ jobs:
         run: ./gradlew assembleRelease --build-cache --no-daemon
 
       - name: Set up Firebase Service Account Credentials file
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > $HOME/firebase-service-account.json
+        run: |
+          printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > $HOME/firebase-service-account.json
         # This step retrieves the Firebase service account credentials from the GitHub secret
         # and saves it to a file that will be used in the upload step.
-      - name: Check File Creation
+
+      - name: Check File Creation and Print Contents (For Debugging)
         run: |
           if [ -f $HOME/firebase-service-account.json ]; then
             echo "File firebase-service-account.json created successfully."
+            cat $HOME/firebase-service-account.json # Ensure file has content
           else
             echo "Error: File firebase-service-account.json not created."
             exit 1
