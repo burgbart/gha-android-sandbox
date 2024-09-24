@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - firebase
 
 jobs:
   build:
@@ -32,11 +33,14 @@ jobs:
 
       - name: Set up Firebase Service Account Credentials file
         run: |
-          printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" >firebase-service-account.json
+          printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" >$HOME/firebase-service-account.json
         # This step retrieves the Firebase service account credentials from the GitHub secret
         # and saves it to a file that will be used in the upload step.
+
+      - name: Set Permissions for Service Account File
+        run: chmod 600 $HOME/firebase-service-account.json
 
       - name: Upload APK to Firebase App Distribution
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/firebase-service-account.json
