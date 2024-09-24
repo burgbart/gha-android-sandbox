@@ -32,7 +32,7 @@ android {
             )
             firebaseAppDistribution {
                 artifactType = "APK"
-                appId = "example-project-1510307118506"
+                appId = "1:722428438106:android:b7da48ab5783b2ea711a63"
             }
 
         }
