@@ -33,22 +33,17 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
-
-      - name: Build APK
-        run: ./gradlew assembleRelease --build-cache --no-daemon
+#
+#      - name: Build APK
+#        run: ./gradlew assembleRelease --build-cache --no-daemon
 
       # Step 1: Create the file at the path defined by GOOGLE_APPLICATION_CREDENTIALS
       - name: Create Firebase Service Account Credentials File
-        run: |
-          printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > $GOOGLE_APPLICATION_CREDENTIALS
-        shell: bash
-        # The credentials content comes from the GitHub secret FIREBASE_SERVICE_ACCOUNT.
-        # It is then written to the path defined by the GOOGLE_APPLICATION_CREDENTIALS env variable.
+        run: printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > $GOOGLE_APPLICATION_CREDENTIALS
 
       # Step 2: Print the content of the file (for debugging)
       - name: Print Firebase Service Account Credentials File
         run: cat $GOOGLE_APPLICATION_CREDENTIALS
-        shell: bash
-
-      - name: Upload APK to Firebase App Distribution
-        run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
+#
+#      - name: Upload APK to Firebase App Distribution
+#        run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
