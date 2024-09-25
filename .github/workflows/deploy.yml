@@ -32,7 +32,10 @@ jobs:
 #        run: ./gradlew assembleRelease --build-cache --no-daemon
 
       - name: Create Firebase Service Account Credentials File
-        run: echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} > ${{ runner.temp }}/firebase-service-account.json
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > ${{ runner.temp }}/firebase-service-account.json
+
+      - name: Print Firebase Service Account Credentials File
+        run: cat "${{ runner.temp }}/firebase-service-account.json"
 
       - name: Check Temporary File Permissions
         run: |
