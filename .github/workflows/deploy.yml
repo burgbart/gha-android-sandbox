@@ -26,7 +26,7 @@ jobs:
 
       - name: Use GOOGLE_APPLICATION_CREDENTIALS in expression
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json
         run: echo "This is the value ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}"
 
 #      - name: Set up JDK 17
