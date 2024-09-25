@@ -41,10 +41,19 @@ jobs:
 #        env:
 #          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
 
+      - name: Cache Fastlane Gems
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'  # Adjust Ruby version as necessary
+          ruby-version: '3.3'  # Adjust Ruby version as necessary
+          bundler-cache: true
 
       - name: Install Fastlane
         run: gem install fastlane
