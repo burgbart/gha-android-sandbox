@@ -34,9 +34,6 @@ jobs:
       - name: Create Firebase Service Account Credentials File
         run: printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" >  ${{ runner.temp }}/firebase-service-account.json
 
-      - name: Print Firebase Service Account Credentials File
-        run: cat "$GOOGLE_APPLICATION_CREDENTIALS"
-
       - name: Upload APK to Firebase App Distribution
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
         env:
