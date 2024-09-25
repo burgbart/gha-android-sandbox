@@ -27,21 +27,19 @@ jobs:
       - name: Use GOOGLE_APPLICATION_CREDENTIALS in expression
         run: echo "This is the value ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}"
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: temurin
+#          java-version: 17
+#          cache: gradle
 #
 #      - name: Build APK
 #        run: ./gradlew assembleRelease --build-cache --no-daemon
 
-      # Step 1: Create the file at the path defined by GOOGLE_APPLICATION_CREDENTIALS
       - name: Create Firebase Service Account Credentials File
         run: printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > $GOOGLE_APPLICATION_CREDENTIALS
 
-      # Step 2: Print the content of the file (for debugging)
       - name: Print Firebase Service Account Credentials File
         run: cat $GOOGLE_APPLICATION_CREDENTIALS
 #
