@@ -10,9 +10,6 @@ jobs:
   build:
     name: Build and Deploy to Firebase
     runs-on: ubuntu-latest
-
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json
     steps:
       - name: Check required secrets
         run: |
@@ -35,10 +32,12 @@ jobs:
         run: ./gradlew assembleRelease --build-cache --no-daemon
 
       - name: Create Firebase Service Account Credentials File
-        run: printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "$GOOGLE_APPLICATION_CREDENTIALS"
+        run: printf "%s" "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" >  ${{ runner.temp }}/firebase-service-account.json
 
       - name: Print Firebase Service Account Credentials File
         run: cat "$GOOGLE_APPLICATION_CREDENTIALS"
 
       - name: Upload APK to Firebase App Distribution
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
