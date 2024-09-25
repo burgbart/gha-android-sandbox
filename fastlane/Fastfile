@@ -6,7 +6,7 @@ platform :android do
     build_android_app()
     release = firebase_app_distribution(
         app: ENV["FIREBASE_APP_ID"],
-        testers: "bartb@backbase.com"
+        testers: "bartb@backbase.com",
         release_notes: "Lots of amazing new features to test out!"
     )
   end

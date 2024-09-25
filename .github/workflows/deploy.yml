@@ -40,3 +40,13 @@ jobs:
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
+
+#      - name: Upload APK to Firebase App Distribution
+#        run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
+#        env:
+#          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
+
+      - name: Deploy to Firebase App Distribution via fastlane
+        run: bundle exec fastlane firebase_distribution
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
