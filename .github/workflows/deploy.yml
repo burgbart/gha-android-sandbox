@@ -28,8 +28,8 @@ jobs:
           java-version: 17
           cache: gradle
 
-#      - name: Build APK
-#        run: ./gradlew assembleRelease --build-cache --no-daemon
+      - name: Build APK
+        run: ./gradlew assembleRelease --build-cache --no-daemon
 
       - name: Create Firebase Service Account Credentials File
         env:
