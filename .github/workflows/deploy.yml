@@ -28,13 +28,13 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Build APK
-        run: ./gradlew assembleRelease --build-cache --no-daemon
-
       - name: Create Firebase Service Account Credentials File
         env:
           JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} # Required to ensure quotes stay in JSON file
         run: echo "$JSON" > ${{ runner.temp }}/firebase-service-account.json
+
+      - name: Build APK
+        run: ./gradlew assembleRelease --build-cache --no-daemon
 
       - name: Upload APK to Firebase App Distribution
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
