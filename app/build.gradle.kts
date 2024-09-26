@@ -32,7 +32,7 @@ android {
             )
             firebaseAppDistribution {
                 artifactType = "APK"
-                appId = "1:722428438106:android:b7da48ab5783b2ea711a63"
+                appId = System.getenv("FIREBASE_APP_ID")
             }
 
         }
