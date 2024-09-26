@@ -3,10 +3,12 @@ default_platform(:android)
 platform :android do
   desc "Deploy to Firebase App Distribution"
   lane :firebase_distribution do
-    build_android_app()
+    build_android_app(
+      task: "assembleRelease"  # Use the appropriate Gradle task
+    )
     release = firebase_app_distribution(
         app: ENV["FIREBASE_APP_ID"],
-        testers: "bartb@backbase.com"
+        testers: "bartb@backbase.com",
         release_notes: "Lots of amazing new features to test out!"
     )
   end
