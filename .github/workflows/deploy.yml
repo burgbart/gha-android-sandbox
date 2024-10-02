@@ -17,9 +17,6 @@ jobs:
             exit 1
           fi
 
-      - name: Print PR Description
-        run: echo "PR description ${{ github.event.pull_request.body }}"
-
       - name: Checkout repository
         uses: actions/checkout@v3
 

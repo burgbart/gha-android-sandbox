@@ -1,0 +1,27 @@
+name: Check PR Checkbox
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-checkbox:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Extract PR Description
+      - name: Get PR Description
+        id: get_pr_description
+        run: echo "${{ github.event.pull_request.body }}" > pr_description.txt
+
+      # Step 2: Check if the "Reference documentation updated" checkbox is checked
+      - name: Check if "Reference documentation updated" is checked
+        id: check_checkbox
+        run: |
+          # Search for the exact string pattern in the PR description
+          if grep -q '\- \[x\] Reference documentation updated' pr_description.txt; then
+            echo "The 'Reference documentation updated' checkbox is checked."
+          else
+            echo "ERROR: The 'Reference documentation updated' checkbox is NOT checked."
+            exit 1  # Fail the job if the checkbox is not checked
+          fi
