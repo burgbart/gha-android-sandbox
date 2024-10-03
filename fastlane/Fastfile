@@ -4,7 +4,7 @@ platform :android do
   desc "Deploy to Firebase App Distribution"
   lane :firebase_distribution do
     build_android_app(
-      task: "assembleRelease"  # Use the appropriate Gradle task
+      task: "assembleRelease --build-cache --no-daemon"  # Use the appropriate Gradle task
     )
     release = firebase_app_distribution(
         app: ENV["FIREBASE_APP_ID"],
