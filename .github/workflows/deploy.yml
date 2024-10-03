@@ -28,6 +28,6 @@ jobs:
           cache: gradle
 
       - name: Deploy to Firebase
-        uses: ./github/actions/firebase-deploy
+        uses: ./.github/actions/firebase-deploy
         with:
           firebase-service-account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
