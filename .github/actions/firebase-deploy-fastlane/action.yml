@@ -1,0 +1,44 @@
+name: Firebase Deploy Action
+description: Build APK and upload it to Firebase App Distribution using Fastlane.
+inputs:
+  firebase-service-account:
+    description: 'Firebase Service Account JSON'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Create Firebase Service Account Credentials File
+      env:
+        JSON: ${{ inputs.firebase_service_account }}
+      shell: bash
+      run: echo "$JSON" > ${{ runner.temp }}/firebase-service-account.json
+
+    - name: Build APK
+      shell: bash
+      run: ./gradlew assembleRelease --build-cache --no-daemon
+
+    - name: Cache Fastlane Gems
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Cache Fastlane Gems
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'  # Adjust Ruby version as necessary
+        bundler-cache: true
+
+    - name: Install Fastlane
+      shell: bash
+      run: gem install fastlane

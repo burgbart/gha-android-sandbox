@@ -14,7 +14,7 @@ android {
         applicationId = "com.bartburg.githubactionsandbox"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
+        versionCode = 3
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,7 +32,7 @@ android {
             )
             firebaseAppDistribution {
                 artifactType = "APK"
-                appId = "1:722428438106:android:b7da48ab5783b2ea711a63"
+                appId = System.getenv("FIREBASE_APP_ID")
             }
 
         }
