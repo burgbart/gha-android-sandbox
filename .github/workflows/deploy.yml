@@ -34,12 +34,12 @@ jobs:
       - name: Create Firebase Service Account Credentials File
         env:
           JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} # Required to ensure quotes stay in JSON file
-        run: echo "$JSON" > firebase-service-account.json
+        run: echo "$JSON" > ${{ runner.temp }}/firebase-service-account.json
 
       - name: Upload APK to Firebase App Distribution
         run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json  # Set the env variable here
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
 
 #      - name: Cache Fastlane Gems
 #        uses: actions/cache@v3
