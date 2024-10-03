@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - firebase
 
 jobs:
   build:
@@ -27,7 +28,38 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Deploy to Firebase
-        uses: ./github/actions/firebase-deploy
+      #      - name: Build APK
+      #        run: ./gradlew assembleRelease --build-cache --no-daemon
+
+      - name: Create Firebase Service Account Credentials File
+        env:
+          JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} # Required to ensure quotes stay in JSON file
+        run: echo "$JSON" > ${{ runner.temp }}/firebase-service-account.json
+
+      #      - name: Upload APK to Firebase App Distribution
+      #        run: ./gradlew appDistributionUploadRelease --build-cache --no-daemon
+      #        env:
+      #          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
+
+      - name: Cache Fastlane Gems
+        uses: actions/cache@v3
         with:
-          firebase-service-account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'  # Adjust Ruby version as necessary
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Run Fastlane
+        run: bundle exec fastlane firebase_distribution
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-service-account.json  # Set the env variable here
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}  # Set the env variable here
